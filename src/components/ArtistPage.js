@@ -21,7 +21,7 @@ const ArtistPage = () => {
             const song_data = await song_response.json();
             setSongList(song_data.tracks);
         })();
-    }, []);
+    }, [artist_id]);
 
     const image_url = `https://api.napster.com/imageserver/v2/artists/${artist_id}/images/633x422.jpg`;
   

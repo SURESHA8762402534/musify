@@ -21,7 +21,7 @@ const SearchContainer = () => {
             setSongsList(search_result.tracks);
             setArtistList(search_result.artists);
         })();
-    },[])
+    },[query])
 
     return (
         <Box component="main" sx={{ flexGrow: 1, p: 3}}>
