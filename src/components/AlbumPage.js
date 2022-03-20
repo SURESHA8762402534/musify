@@ -25,7 +25,7 @@ const AlbumPage = () => {
             const song_data = await song_response.json();
             setSongList(song_data.tracks);
         })();
-    }, []);
+    }, [album_id]);
 
     const changePlaylist = () => {
         dispatch(replacePlaylist(songList));
