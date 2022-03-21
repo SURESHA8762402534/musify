@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Box, Toolbar, Paper, Stack, Typography, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Chip, Fab } from '@mui/material';
+import { Box, Grid, Skeleton, Toolbar, Paper, Stack, Typography, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Chip, Fab } from '@mui/material';
 import { NAPSTER_API_KEY } from '../constants';
 import SongTableRow from './SongTableRow';
 import { PlayArrow } from '@mui/icons-material';
@@ -78,9 +78,24 @@ const AlbumPage = () => {
                     </TableHead>
                     
                     <TableBody>
-                        {songList.map((single_song, idx) => (
+                        {(songList.length !== 0)? 
+                         songList.map((single_song, idx) => (
                             <SongTableRow data={single_song} key={idx} index={idx} owner="album" />
-                        ))}
+                        ))
+                        :
+                        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} alignItems="stretch">
+                        {Array.from(Array(3)).map((_, idx) => {
+                            return (
+                                <Box key={idx} sx={{ width: 300, ml:4 ,mt:3 }}>
+                                    <Skeleton />
+                                    <Skeleton animation="wave" />
+                                    <Skeleton animation={false} />
+                                </Box>
+                            )
+                        })}
+                    </Grid>
+                    }
+                       
                     </TableBody>
                 </Table>
             </TableContainer>
