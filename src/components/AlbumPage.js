@@ -29,6 +29,7 @@ const AlbumPage = () => {
 
     const changePlaylist = () => {
         dispatch(replacePlaylist(songList));
+        
     }
 
     const image_url = `https://api.napster.com/imageserver/v2/albums/${album_id}/images/500x500.jpg`;

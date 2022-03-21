@@ -24,6 +24,9 @@ const PlayerContainer = () => {
   
 
   const appState = useSelector((state) => state);
+
+  let play = appState.set_play;
+
   let image_url = ""
   if (appState?.currently_playing.albumId !== undefined) {
     image_url = `https://api.napster.com/imageserver/v2/albums/${appState?.currently_playing.albumId}/images/200x200.jpg`;
@@ -71,19 +74,33 @@ const PlayerContainer = () => {
     dispatch(playPreviousSong());
   }
 
+  // const togglePlayPause = () => {
+  //   setPlaying((isPlaying) => {
+  //     const newState = !currentState;
+  //     dispatch({type:"TOGGELE_BUTTON"})
+
+  //     if (newState) {
+        
+  //       audioPlayer.current.play();
+  //     } else {
+        
+  //       audioPlayer.current.pause();
+  //     }
+  //     return newState;
+  //   })
+  //   console.log(play)
+  // }
   const togglePlayPause = () => {
-    setPlaying((currentState) => {
-      const newState = !currentState;
-
-      if (newState) {
-        audioPlayer.current.play();
-      } else {
-        audioPlayer.current.pause();
-      }
-      return newState;
-    })
+    dispatch({type:"TOGGELE_BUTTON"});
+    
+    if(isPlaying){
+      setPlaying(false)
+      audioPlayer.current.play();
+    }else{
+      setPlaying(true)
+      audioPlayer.current.pause();
+    }
   }
-
   const toggleRepeat = () => {
     setRepeat((currentState) => {
       const newState = !currentState;
@@ -161,7 +178,7 @@ const PlayerContainer = () => {
             </IconButton>
 
             <Fab color="primary" aria-label="add" onClick={togglePlayPause}>
-              {(isPlaying) ? <PauseIcon fontSize='large' /> : <PlayArrowIcon fontSize='large' />}
+              {( play ) ? <PauseIcon fontSize='large' /> : <PlayArrowIcon fontSize='large' />}
             </Fab>
 
             <IconButton aria-label="delete" onClick={playNext}>

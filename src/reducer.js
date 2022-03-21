@@ -5,15 +5,20 @@ const initiaState = {
     favourite_list: {},
     playlist: [],
     playing_index: 0,
+    set_play: false
 };
 
 const reducer = (currentState = initiaState, action) => {
     const newState = { ...currentState };
 
-    switch(action.type) {
+    switch (action.type) {
         case SET_PLAY_NOW:
             newState.currently_playing = action.payload;
-            newState.playlist = [ action.payload, ...newState.playlist ];
+            newState.playlist = [action.payload, ...newState.playlist];
+            newState.set_play = true;
+            break;
+        case "TOGGELE_BUTTON":
+            newState.set_play = !newState.set_play;
             break;
         case MAKE_FAVOURITE:
             newState.favourite_list[action.payload.id] = action.payload;
@@ -25,30 +30,31 @@ const reducer = (currentState = initiaState, action) => {
             break;
         case ADD_TO_PLAYLIST:
             newState.playlist.push(action.payload);
-            newState.playlist = [ ...newState.playlist ];
+            newState.playlist = [...newState.playlist];
             break;
         case PLAY_NEXT_SONG:
-            if((newState.playlist.length - 1) > newState.playing_index) {
+            if ((newState.playlist.length - 1) > newState.playing_index) {
                 newState.playing_index++;
                 newState.currently_playing = newState.playlist[newState.playing_index];
             }
             break;
         case PLAY_PREV_SONG:
-            if(newState.playing_index > 0) {
+            if (newState.playing_index > 0) {
                 newState.playing_index--;
                 newState.currently_playing = newState.playlist[newState.playing_index];
             }
             break;
         case REPLACE_PLAYLIST:
-            if(action.payload.length > 0) {
+            if (action.payload.length > 0) {
                 newState.playlist = action.payload;
                 newState.playing_index = 0;
                 newState.currently_playing = newState.playlist[0];
+                newState.set_play = !newState.set_play
             }
             break;
-            default:
-                break;
-            
+        default:
+            break;
+
     }
 
     return newState;

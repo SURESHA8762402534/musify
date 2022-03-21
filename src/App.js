@@ -15,7 +15,7 @@ import SearchContainer from './components/SearchContainer';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import FavouriteListContainer from './components/FavouriteListContainer';
 import PlaylistContainer from './components/PlaylistContainer';
-
+import './App.css'
 const App = () => {
 
   const [theme, setTheme] = useState(createTheme({

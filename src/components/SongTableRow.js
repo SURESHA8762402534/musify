@@ -1,5 +1,7 @@
 import React from 'react'
-import { FavoriteBorder, PlayArrow, Favorite, PlaylistAdd } from '@mui/icons-material';
+import { FavoriteBorder, Favorite, PlaylistAdd } from '@mui/icons-material';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 import { TableRow, TableCell, IconButton, Typography, Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeFavourite, removeFavourite, setPlayNow, addToPlaylist } from '../actions';
@@ -7,13 +9,16 @@ import { Link} from 'react-router-dom';
 
 const SongTableRow = (props) => {
     const dispatch    = useDispatch();
+    const appState = useSelector(state => state);
     const isFavourite = useSelector((state) => state.favourite_list[props.data.id] !== undefined );
     const isPlaying   = useSelector((state) => state.currently_playing.id === props.data.id);
     const image_url   = `https://api.napster.com/imageserver/v2/albums/${props.data?.albumId}/images/150x150.jpg`;
-
+    
     const playSong = () => {
-        dispatch(setPlayNow(props.data));    
+        dispatch(setPlayNow(props.data)); 
+       
     }
+    
     const toggleFavourite = () => {
         if(isFavourite) {
             dispatch(removeFavourite(props.data.id));
@@ -55,7 +60,7 @@ const SongTableRow = (props) => {
             </TableCell>
             <TableCell>
                 <IconButton aria-label="delete" size="large" onClick={playSong}>
-                    <PlayArrow fontSize="large" />
+                {( appState?.currently_playing.id === props.data.id ) ? <PauseIcon fontSize='large' /> : <PlayArrowIcon fontSize='large' />}
                 </IconButton>
                 <IconButton aria-label="delete" size="large" onClick={toggleFavourite}>
                     {isFavourite ? <Favorite /> : <FavoriteBorder />}
