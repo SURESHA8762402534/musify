@@ -10,7 +10,7 @@ const TopArtistContainer = () => {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(`http://api.napster.com/v2.2/artists/top?apikey=${NAPSTER_API_KEY}`);
+            const response = await fetch(`https://api.napster.com/v2.2/artists/top?apikey=${NAPSTER_API_KEY}`);
             const data = await response.json();
             setArtistList(data.artists);
         })();
