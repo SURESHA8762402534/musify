@@ -16,7 +16,7 @@ const AlbumPage = () => {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(`http://api.napster.com/v2.2/albums/${album_id}?apikey=${NAPSTER_API_KEY}`);
+            const response = await fetch(`https://api.napster.com/v2.2/albums/${album_id}?apikey=${NAPSTER_API_KEY}`);
             const data = await response.json();
             if(data.albums.length > 0) {
                 setAlbumDetails(data.albums[0]); 
