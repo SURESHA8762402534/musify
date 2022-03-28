@@ -6,7 +6,7 @@ import SongTableRow from './SongTableRow';
 
 const PlaylistContainer = () => {
     const playlist = useSelector((state) => state.playlist);
-    console.log(playlist);
+    
 
     return (
         <Box component="main" sx={{ flexGrow: 1, p: 3, m: 3 }}>
