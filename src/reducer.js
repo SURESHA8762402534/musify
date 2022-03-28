@@ -13,9 +13,15 @@ const reducer = (currentState = initiaState, action) => {
 
     switch (action.type) {
         case SET_PLAY_NOW:
-            newState.currently_playing = action.payload;
-            newState.playlist = [action.payload, ...newState.playlist];
-            newState.set_play = true;
+            if (newState.currently_playing.id !== action.payload.id) {
+                newState.currently_playing = action.payload;
+                newState.set_play = true;
+
+                if (!newState.playlist.includes(action.payload)) {
+                    newState.playlist = [action.payload, ...newState.playlist];
+                }
+            }
+
             break;
         case "TOGGELE_BUTTON":
             newState.set_play = !newState.set_play;
@@ -51,6 +57,7 @@ const reducer = (currentState = initiaState, action) => {
                 newState.currently_playing = newState.playlist[0];
                 newState.set_play = !newState.set_play
             }
+
             break;
         default:
             break;

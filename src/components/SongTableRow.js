@@ -9,14 +9,16 @@ import { Link} from 'react-router-dom';
 
 const SongTableRow = (props) => {
     const dispatch    = useDispatch();
-    const appState = useSelector(state => state);
+    const appState = useSelector((state) => { return state});
     const isFavourite = useSelector((state) => state.favourite_list[props.data.id] !== undefined );
     const isPlaying   = useSelector((state) => state.currently_playing.id === props.data.id);
     const image_url   = `https://api.napster.com/imageserver/v2/albums/${props.data?.albumId}/images/150x150.jpg`;
     
     const playSong = () => {
-        dispatch(setPlayNow(props.data)); 
-       
+        console.log(appState.set_play)
+        if(appState.currently_playing.id !== props.data.id){
+            dispatch(setPlayNow(props.data)); 
+        }
     }
     
     const toggleFavourite = () => {
@@ -60,7 +62,7 @@ const SongTableRow = (props) => {
             </TableCell>
             <TableCell>
                 <IconButton aria-label="delete" size="large" onClick={playSong}>
-                {( appState?.currently_playing.id === props.data.id ) ? <PauseIcon fontSize='large' /> : <PlayArrowIcon fontSize='large' />}
+                {( appState?.currently_playing.id === props.data.id && appState.set_play ) ? <PauseIcon fontSize='large' /> : <PlayArrowIcon fontSize='large' />}
                 </IconButton>
                 <IconButton aria-label="delete" size="large" onClick={toggleFavourite}>
                     {isFavourite ? <Favorite /> : <FavoriteBorder />}

@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducer';
 import { Provider } from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
+import logger from 'redux-logger';
 
-const store = createStore(reducer);
+
+const store = createStore(reducer, applyMiddleware(logger));
 
 ReactDOM.render(
   <React.StrictMode>

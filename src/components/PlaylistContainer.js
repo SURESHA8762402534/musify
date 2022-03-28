@@ -33,7 +33,7 @@ const PlaylistContainer = () => {
                             <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }} alignItems="stretch">
                                 {Array.from(Array(3)).map((_, idx) => {
                                     return (
-                                        <Box key={idx} sx={{ width: 300, ml: 4, mt: 3 }}>
+                                        <Box key={idx} sx={{ width: 300, ml: 3, mt: 3 }}>
                                             <Skeleton />
                                             <Skeleton animation="wave" />
                                             <Skeleton animation={false} />

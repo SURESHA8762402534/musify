@@ -23,7 +23,8 @@ const PlayerContainer = () => {
   const dispatch = useDispatch();
   
 
-  const appState = useSelector((state) => state);
+  const appState = useSelector((state) => {
+    return state});
 
   let play = appState.set_play;
 
@@ -96,7 +97,7 @@ const PlayerContainer = () => {
     if(isPlaying){
       setPlaying(false)
       audioPlayer.current.play();
-    }else{
+    }else {
       setPlaying(true)
       audioPlayer.current.pause();
     }
